@@ -4,3 +4,11 @@ from django.shortcuts import render, HttpResponse
 
 def index(request):
     return HttpResponse("Hello, it's pepper.");
+
+
+def signUp(request):
+    return HttpResponse("Sign up")
+
+
+def signIn(request):
+    return HttpResponse("Sign in")
