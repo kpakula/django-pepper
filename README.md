@@ -24,6 +24,7 @@ python manage.py migrate
 ```
 Django
 PostgreSQL
+Bootstrap
 ```
 
 ## Database
