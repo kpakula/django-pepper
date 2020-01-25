@@ -4,7 +4,7 @@ label {
 }
 
 .login-form{
-    padding: 5%;
+    padding: 4%;
     background: #0062cc;
     text-align: center;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
@@ -43,7 +43,12 @@ label {
 }
 
 .outer {
-    width: 75%;
+    width: 65%;
     margin-right: auto;
     margin-left: auto;
+
+}
+
+.form-text {
+    display: none;
 }

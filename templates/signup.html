@@ -1,20 +1,96 @@
 {% extends './base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
 {% block content %}
-  <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {% for field in form %}
+<link rel="stylesheet" type="text/css" href="{% static 'app/login.css' %}">
+<div class="row justify-content-center align-items-center h-100 regContainer">
+  <div class="col-md-5 login-form">
+    {% comment %} START {% endcomment %}
+
+    <form method="post">
+      {% csrf_token %}
+
+
+
+            <div class="outer">
+      <div class="myform">
+        {% if form.username.help_text %}
+        <small style="color: grey">{{ field.help_text }}</small>
+        {% endif %}
+        {{ form.username|as_crispy_field }}
+      </div>
+
+      <div class="myform">
+        {% comment %} {% if form.password1.help_text %}
+        <small style="color: grey">{{ field.help_text }}</small>
+        {% endif %} {% endcomment %}
+        {{ form.password1|as_crispy_field }}
+      </div>
+
+      <div class="myform">
+        {% if form.password2.help_text %}
+        <small style="color: grey">{{ field.help_text }}</small>
+        {% endif %}
+        {{ form.password2|as_crispy_field }}
+      </div>
+      </div>
+
+{% comment %} 
+      {{ form.password1.label_tag}}
+      {{ form.password1}}
+      {% if form.password1.help_text %}
+      <small style="color: grey">{{ field.help_text }}</small>
+      {% endif %}
+
+      {{ form.password2.label_tag}}
+      {{ form.password2}}
+      {% if form.password2.help_text %}
+      <small style="color: grey">{{ field.help_text }}</small>
+      {% endif %} {% endcomment %}
+
+
+
+      {% comment %} {% for field in form %}
       <p>
         {{ field.label_tag }}<br>
         {{ field }}
         {% if field.help_text %}
-          <small style="color: grey">{{ field.help_text }}</small>
+        <small style="color: grey">{{ field.help_text }}</small>
         {% endif %}
         {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
+        <p style="color: red">{{ error }}</p>
         {% endfor %}
       </p>
+      {% endfor %} {% endcomment %}
+      {% comment %} <button type="submit">Sign up</button> {% endcomment %}
+      <div class="form-group pt-2">
+        <input type="submit" class="btnSubmit" value="Sign up" />
+      </div>
+
+    </form>
+
+
+    {% comment %} END {% endcomment %}
+  </div>
+</div>
+
+
+{% comment %} <form method="post">
+  {% csrf_token %}
+  {% for field in form %}
+  <p>
+    {{ field.label_tag }}<br>
+    {{ field }}
+    {% if field.help_text %}
+    <small style="color: grey">{{ field.help_text }}</small>
+    {% endif %}
+    {% for error in field.errors %}
+    <p style="color: red">{{ error }}</p>
     {% endfor %}
-    <button type="submit">Sign up</button>
-  </form>
+  </p>
+  {% endfor %}
+  <button type="submit">Sign up</button>
+</form> {% endcomment %}
 {% endblock %}
