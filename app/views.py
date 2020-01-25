@@ -12,6 +12,8 @@ def index(request):
 
 
 def register(request):
+    if request.user.is_authenticated:
+        return redirect('/app/home')
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -20,7 +22,7 @@ def register(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             auth_login(request, user)
-            return redirect('/')
+            return redirect('/app/profile')
     else:
         form = UserCreationForm()
         
@@ -38,11 +40,11 @@ def login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 auth_login(request, user)
-                return redirect('/app/')
+                return redirect('/app/home')
             else:
-                return HttpResponse("Hello, it's pepper.");
+                messages.error(request, "Invalid login or password")
         else:
-            return HttpResponse("Hello, it's pepper.");
+            messages.error(request, "Invalid login or password")
 
     form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
