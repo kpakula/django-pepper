@@ -4,3 +4,5 @@ info.txt
 .vscode/
 env/
 data.py
+
+app/migrations/__pycache__

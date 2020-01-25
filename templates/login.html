@@ -5,45 +5,54 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'app/login.css' %}">
 <div class="row justify-content-center align-items-center h-100">
-<div class="col-md-5 login-form">
-                    <h3>Login</h3>
-                    <form method="POST">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Your Login" value="" />
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Your Password *" value="" />
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" class="btnSubmit" value="Login" />
-                        </div>
-                        <div class="form-group">
-                            <a href="#" class="ForgotPwd" value="Login">Forgot Password?</a>
-                        </div>
+    <div class="col-md-5 login-form">
 
-                        {% if messages %}
-<div class="row">
-    {% for message in messages %}
-    <div class="col-md-12">
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Holy guacamole!</strong> {{message}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <div class="form-group">
+                <input type="submit" class="btnSubmit" value="Login" />
+            </div>
+
+            {% if messages %}
+            <div class="row">
+                {% for message in messages %}
+                <div class="col-md-12">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Holy guacamole!</strong> {{message}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </form>
+        {% comment %} <h3>Login</h3>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <input id="username" type="text" class="form-control" placeholder="Your Login" value="" />
+            </div>
+            <div class="form-group">
+                <input id="password" type="password" class="form-control" placeholder="Your Password *" value="" />
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btnSubmit" value="Login" />
+            </div>
+            <div class="form-group">
+                <a href="#" class="ForgotPwd" value="Login">Forgot Password?</a>
+            </div>
+
+
+
+
+
+
+
+        </form> {% endcomment %}
     </div>
-        {% endfor %}
-</div>
-{% endif %}
-
-
-
-
-
-
-                    </form>
-</div>
 </div>
 {% comment %} {% if messages %} {% endcomment %}
 {% comment %} <div class="row">
@@ -56,27 +65,27 @@
             </button>
         </div>
     </div>
-        {% endfor %}
+    {% endfor %}
 </div>
 {% endif %} {% endcomment %}
 
 
-    {% comment %} <form method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">Login</button>
-    </form>
-    {% if messages %}
-    {% for message in messages %}
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Holy guacamole!</strong> {{message}}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+{% comment %} <form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Login</button>
+</form>
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Holy guacamole!</strong> {{message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
 </div>
-    {% endfor %}
-    {% endif %}
-    Don't have an account? <a href="/app/register" target="blank"><strong>register here</strong></a>!
+</div>
+{% endfor %}
+{% endif %}
+Don't have an account? <a href="/app/register" target="blank"><strong>register here</strong></a>!
 </div> {% endcomment %}
 {% endblock %}
