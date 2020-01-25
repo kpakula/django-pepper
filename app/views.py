@@ -40,12 +40,11 @@ class CustomLoginView(TemplateView):
 
     def post(self, request):
         form = LoginForm(request.POST)
-
+        
         if form.is_valid():
-                
-            post = form.cleaned_data['post']
-            post2 = form.cleaned_data['post2']
-            user = authenticate(username=post, password=post)
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
 
             if user is not None:
                 auth_login(request, user)
