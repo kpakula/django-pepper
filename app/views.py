@@ -2,7 +2,9 @@ from django.shortcuts import render, HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import  authenticate
 from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
 from django.shortcuts import render, redirect
+from django.contrib import messages 
 # Create your views here.
 
 def index(request):
@@ -26,6 +28,8 @@ def register(request):
 
 
 def login(request):
+    if request.user.is_authenticated:
+        return redirect('/app/home')
     if request.method == 'POST':
         form = AuthenticationForm(request=request, data=request.POST)
         if form.is_valid():
@@ -36,10 +40,16 @@ def login(request):
                 auth_login(request, user)
                 return redirect('/app/')
             else:
-                print('invalid')
-                # messages.error(request, "Invalid username or password.")
+                return HttpResponse("Hello, it's pepper.");
         else:
-            print('invalid')
-            # messages.error(request, "Invalid username or password. ")
+            return HttpResponse("Hello, it's pepper.");
+
     form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
+
+def logout(request):
+    auth_logout(request)
+    return redirect('/app/home')
+
+def home(request):
+    return render(request, 'home.html')
