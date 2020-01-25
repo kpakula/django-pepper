@@ -8,7 +8,7 @@ def index(request):
     return HttpResponse("Hello, it's pepper.");
 
 
-def signUp(request):
+def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -24,5 +24,5 @@ def signUp(request):
     return render(request, 'signup.html', {'form': form})
 
 
-def signIn(request):
+def login(request):
     return HttpResponse("Sign in")
