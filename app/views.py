@@ -34,9 +34,13 @@ def login(request):
         return redirect('/app/home')
     if request.method == 'POST':
         form = AuthenticationForm(request=request, data=request.POST)
+        print(form.cleaned_data.get('username'))
+        print(form.cleaned_data.get('password'))
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
+            print(username)
+            print(password)
             user = authenticate(username=username, password=password)
             if user is not None:
                 auth_login(request, user)
