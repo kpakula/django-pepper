@@ -1,3 +1,7 @@
+label {
+    color: #ffffff;
+    font-weight: bold;
+}
 
 .login-form{
     padding: 5%;
@@ -31,4 +35,15 @@
     color: #fff;
     font-weight: 600;
     text-decoration: none;
+}
+
+.myform {
+    justify-content: center;
+    align-items: center;
+}
+
+.outer {
+    width: 75%;
+    margin-right: auto;
+    margin-left: auto;
 }
