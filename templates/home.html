@@ -1,12 +1,20 @@
 {% extends './base.html' %}
+{% load static %}
+
+
 {% block content %}
-  <h2>Home page</h2>
+<link rel="stylesheet" type="text/css" href="{% static 'app/home.css' %}">
+
+{% include './navbar.html'%}
+
+
+
 {% if user.is_authenticated %}
-  Hi {{ user.username }}!
-  <a href="{% url 'logout' %}">logout</a>
+Hi {{ user.username }}!
+<a href="{% url 'logout' %}">logout</a>
 {% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">login</a>
-  <a href="{% url 'register'%}">register</a>
+<p>You are not logged in</p>
+<a href="{% url 'login' %}">login</a>
+<a href="{% url 'register'%}">register</a>
 {% endif %}
 {% endblock %}

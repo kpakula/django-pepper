@@ -2,4 +2,5 @@ body,html {
     height: 100vh;
     background-color: #0051bb;
     color: white;
+    margin: 0;
 }
