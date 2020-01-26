@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.views.generic import TemplateView
 from app.forms import LoginForm, OfferForm
 from datetime import date
+from .models import Offer
 # Create your views here.
 
 HOME_PAGE = '/app/home/'
@@ -86,9 +87,21 @@ class CustomTabNewsView(TemplateView):
 
 class CustomAllOfferView(TemplateView):
     template_name = 'all.html'
+    
+    def get_all(self):
+        # idk 
+        all_entries = Offer.objects.all()
+
+        # for offer in all_entries.iterator():
+        #     print(offer.title)
+
+
+        return all_entries
+
     # All offers
     def get(self, request):
-        return render(request, self.template_name, {'nbar': 'all'})
+        all_entries = self.get_all()
+        return render(request, self.template_name, {'nbar': 'all', 'all_entries': all_entries})
 
 class CustomAddOffer(TemplateView):
     template_name = 'addOffer.html'
