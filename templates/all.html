@@ -14,9 +14,5 @@
 
 
 
-
-{% if user.is_authenticated %}
-Hi {{ user.username }}!
-<a href="{% url 'logout' %}">logout</a>
-{% endif %}
+{% include './footer.html'%}
 {% endblock %}
