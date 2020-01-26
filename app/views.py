@@ -64,3 +64,14 @@ class CustomHomeView(TemplateView):
     template_name = 'home.html'
     def get(self, request):
         return render(request, self.template_name, {'nbar': 'home'})
+
+class CustomTabNewsView(TemplateView):
+    template_name = 'news.html'
+    def get(self, request):
+        return render(request, self.template_name, {'nbar': 'news'})
+
+
+class CustomAllOfferView(TemplateView):
+    template_name = 'all.html'
+    def get(self, request):
+        return render(request, self.template_name, {'nbar': 'all'})

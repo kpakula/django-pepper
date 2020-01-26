@@ -1,0 +1,22 @@
+{% extends './base.html' %}
+{% load static %}
+
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'app/all.css' %}">
+
+{% include './navbar.html'%}
+
+
+<div class="row rowTest justify-content-center">
+  {% include './tabs.html'%}
+</div>
+
+
+
+
+{% if user.is_authenticated %}
+Hi {{ user.username }}!
+<a href="{% url 'logout' %}">logout</a>
+{% endif %}
+{% endblock %}
