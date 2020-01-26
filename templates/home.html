@@ -13,10 +13,11 @@
 </div>
 
 
-
-
-{% if user.is_authenticated %}
-Hi {{ user.username }}!
-<a href="{% url 'logout' %}">logout</a>
-{% endif %}
+<div class="footer">
+  {% if user.is_authenticated %}
+  {% comment %} Hi {{ user.username }}! {% endcomment %}
+  <a href="{% url 'logout' %}">
+    <button type="button" class="btn btn-primary">Logout</button></a>
+  {% endif %}
+</div>
 {% endblock %}
