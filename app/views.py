@@ -5,8 +5,10 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.shortcuts import render, redirect
 from django.contrib import messages 
+from django.contrib.auth.models import User
 from django.views.generic import TemplateView
 from app.forms import LoginForm, OfferForm
+from datetime import date
 # Create your views here.
 
 def index(request):
@@ -54,7 +56,7 @@ class CustomLoginView(TemplateView):
         else:
             messages.error(request, "Invalid login or password")
         form = LoginForm()
-        return render(request, 'login.html', {'form': form})
+        return render(request, self.template_name, {'form': form})
 
 def logout(request):
     auth_logout(request)
@@ -85,11 +87,20 @@ class CustomAddOffer(TemplateView):
 
     def post(self, request):
         form = OfferForm(request.POST)
-        
+
         if form.is_valid():
-            form.save()
+            addOffer = form.save(commit=False)
+            addOffer.user = request.user
+
+            
+            today = date.today()
+            d1 = today.strftime("%Y-%m-%d")
+            addOffer.date_published = d1
+
+            addOffer.save()
             return redirect('/app/home')
         else:
+            messages.error(request, form.errors)
             messages.error(request, "Offer is invalid")
         form = OfferForm()
-        return render(request, 'login.html', {'form': form})
+        return render(request, self.template_name, {'form': form})

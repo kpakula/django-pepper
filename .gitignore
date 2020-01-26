@@ -6,3 +6,5 @@ env/
 data.py
 
 app/migrations/__pycache__
+app/migrations/
+history.txt
