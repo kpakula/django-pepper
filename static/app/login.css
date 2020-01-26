@@ -52,3 +52,14 @@ label {
 .form-text {
     display: none;
 }
+
+.description p{
+    font-weight: bold;
+    font-size: smaller;
+    margin-bottom: 0;
+}
+
+a {
+    color: #888545;
+}
+
