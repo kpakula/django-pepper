@@ -63,4 +63,4 @@ def logout(request):
 class CustomHomeView(TemplateView):
     template_name = 'home.html'
     def get(self, request):
-        return render(request, template_name=self.template_name)
+        return render(request, self.template_name, {'nbar': 'home'})

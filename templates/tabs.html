@@ -1,0 +1,13 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'app/tabs.css' %}">
+  
+  <div class="col-7 colCol">
+      <ul class="nav nav-tabs">
+          <li class="nav-item">
+              <a class="nav-link {% if nbar == 'home' %}active{% endif %} changeColor" href="/app/home/">Hot</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link {% if nbar == 'news' %}active{% endif %} changeColor" href="/app/offers/news">News</a>
+          </li>
+      </ul>
+  </div>
