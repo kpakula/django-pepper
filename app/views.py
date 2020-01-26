@@ -6,7 +6,7 @@ from django.contrib.auth import logout as auth_logout
 from django.shortcuts import render, redirect
 from django.contrib import messages 
 from django.views.generic import TemplateView
-from app.forms import LoginForm
+from app.forms import LoginForm, OfferForm
 # Create your views here.
 
 def index(request):
@@ -75,3 +75,21 @@ class CustomAllOfferView(TemplateView):
     template_name = 'all.html'
     def get(self, request):
         return render(request, self.template_name, {'nbar': 'all'})
+
+class CustomAddOffer(TemplateView):
+    template_name = 'addOffer.html'
+
+    def get(self, request):
+        form = OfferForm()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = OfferForm(request.POST)
+        
+        if form.is_valid():
+            form.save()
+            return redirect('/app/home')
+        else:
+            messages.error(request, "Offer is invalid")
+        form = OfferForm()
+        return render(request, 'login.html', {'form': form})

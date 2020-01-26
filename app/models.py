@@ -1,5 +1,6 @@
 from django.db import models
 from django import forms
+from django.conf import settings
 
 # Create your models here.
 class CustomLogin(models.Model):
@@ -8,3 +9,19 @@ class CustomLogin(models.Model):
     
     def __str__(self):
         return self.name
+
+
+class Offer(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    title = models.CharField(max_length=40)
+    date_published = models.DateField()
+    date_start = models.DateField()
+    date_end = models.DateField(blank=True)
+    link = models.CharField(max_length=2048)
+    description = models.CharField(max_length=500)
+    link_to_image = models.CharField(max_length=2048)
+
+    def __str__(self):
+        return self.name
+
+    
