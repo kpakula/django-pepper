@@ -16,7 +16,7 @@ def index(request):
 
 
 def register(request):
-    if request.user.is_authenticated:
+    if not request.user.is_authenticated:
         return redirect('/app/home')
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -37,10 +37,14 @@ class CustomLoginView(TemplateView):
     template_name = 'login.html'
 
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('/app/home')
         form = LoginForm()
         return render(request, self.template_name, {'form': form})
 
     def post(self, request):
+        if not request.user.is_authenticated:
+            return redirect('/app/home')
         form = LoginForm(request.POST)
         
         if form.is_valid():
@@ -59,6 +63,8 @@ class CustomLoginView(TemplateView):
         return render(request, self.template_name, {'form': form})
 
 def logout(request):
+    if request.user.is_authenticated:
+        return redirect('/app/home')
     auth_logout(request)
     return redirect('/app/home')
 
@@ -82,10 +88,14 @@ class CustomAddOffer(TemplateView):
     template_name = 'addOffer.html'
 
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('/app/home')
         form = OfferForm()
         return render(request, self.template_name, {'form': form})
 
     def post(self, request):
+        if not request.user.is_authenticated:
+            return redirect('/app/home')
         form = OfferForm(request.POST)
 
         if form.is_valid():
