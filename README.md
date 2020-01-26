@@ -16,6 +16,12 @@ python manage.py runserver
 # Run the server on specific port
 python manage.py runserver 8080
 
+# Make migration
+python manage.py makemigrations app
+
+# Make sql migration by file
+python3 manage.py sqlmigrate app 0002
+
 # Create migration
 python manage.py migrate
 ```
