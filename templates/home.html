@@ -8,13 +8,29 @@
 {% include './navbar.html'%}
 
 
+<div class="row rowTest justify-content-center">
+  <div class="col-4 colTest">
+    to ja
+  </div>
+
+  <div class="col-4 colTest">
+    to ty
+  </div>
+  <div class="col-6 colTest">
+    to ja
+  </div>
+
+  <div class="col-6 colTest">
+    to ty
+  </div>
+
+</div>
+
+
+
 
 {% if user.is_authenticated %}
 Hi {{ user.username }}!
 <a href="{% url 'logout' %}">logout</a>
-{% else %}
-<p>You are not logged in</p>
-<a href="{% url 'login' %}">login</a>
-<a href="{% url 'register'%}">register</a>
 {% endif %}
 {% endblock %}
