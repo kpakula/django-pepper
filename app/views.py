@@ -11,13 +11,16 @@ from app.forms import LoginForm, OfferForm
 from datetime import date
 # Create your views here.
 
+HOME_PAGE = '/app/home/'
+
+
 def index(request):
-    return redirect('/app/home')
+    return redirect(HOME_PAGE)
 
 
 def register(request):
     if request.user.is_authenticated:
-        return redirect('/app/home')
+        return redirect(HOME_PAGE)
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -26,7 +29,7 @@ def register(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             auth_login(request, user)
-            return redirect('/app/profile')
+            return redirect(HOME_PAGE)
     else:
         form = UserCreationForm()
         
@@ -38,13 +41,13 @@ class CustomLoginView(TemplateView):
 
     def get(self, request):
         if request.user.is_authenticated:
-            return redirect('/app/home')
+            return redirect(HOME_PAGE)
         form = LoginForm()
         return render(request, self.template_name, {'form': form})
 
     def post(self, request):
         if request.user.is_authenticated:
-            return redirect('/app/home')
+            return redirect(HOME_PAGE)
         form = LoginForm(request.POST)
         
         if form.is_valid():
@@ -54,7 +57,7 @@ class CustomLoginView(TemplateView):
 
             if user is not None:
                 auth_login(request, user)
-                return redirect('/app/home')
+                return redirect(HOME_PAGE)
             else:
                 messages.error(request, "Invalid login or password")
         else:
@@ -63,24 +66,27 @@ class CustomLoginView(TemplateView):
         return render(request, self.template_name, {'form': form})
 
 def logout(request):
-    if request.user.is_authenticated:
-        return redirect('/app/home')
+    if not request.user.is_authenticated:
+        return redirect(HOME_PAGE)
     auth_logout(request)
-    return redirect('/app/home')
+    return redirect(HOME_PAGE)
 
 class CustomHomeView(TemplateView):
     template_name = 'home.html'
+    # Hot offers
     def get(self, request):
         return render(request, self.template_name, {'nbar': 'home'})
 
 class CustomTabNewsView(TemplateView):
     template_name = 'news.html'
+    # New offers
     def get(self, request):
         return render(request, self.template_name, {'nbar': 'news'})
 
 
 class CustomAllOfferView(TemplateView):
     template_name = 'all.html'
+    # All offers
     def get(self, request):
         return render(request, self.template_name, {'nbar': 'all'})
 
@@ -89,26 +95,25 @@ class CustomAddOffer(TemplateView):
 
     def get(self, request):
         if not request.user.is_authenticated:
-            return redirect('/app/home')
+            return redirect(HOME_PAGE)
         form = OfferForm()
         return render(request, self.template_name, {'form': form})
 
     def post(self, request):
         if not request.user.is_authenticated:
-            return redirect('/app/home')
+            return redirect(HOME_PAGE)
         form = OfferForm(request.POST)
 
         if form.is_valid():
             addOffer = form.save(commit=False)
             addOffer.user = request.user
 
-            
             today = date.today()
             d1 = today.strftime("%Y-%m-%d")
             addOffer.date_published = d1
 
             addOffer.save()
-            return redirect('/app/home')
+            return redirect(HOME_PAGE)
         else:
             messages.error(request, form.errors)
             messages.error(request, "Offer is invalid")
