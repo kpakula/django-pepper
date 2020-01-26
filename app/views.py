@@ -10,7 +10,7 @@ from app.forms import LoginForm
 # Create your views here.
 
 def index(request):
-    return HttpResponse("Hello, it's pepper.");
+    return redirect('/app/home')
 
 
 def register(request):
@@ -56,38 +56,11 @@ class CustomLoginView(TemplateView):
         form = LoginForm()
         return render(request, 'login.html', {'form': form})
 
-def login(request):
-    if request.user.is_authenticated:
-        return redirect('/app/home')
-    if request.method == 'POST':
-        form = AuthenticationForm(request=request, data=request.POST)
-        form = LoginForm()
-
-        if form.is_valid():
-            # form.save()
-            post = form.cleaned_data['post']
-            post2 = form.cleaned_data['post2']
-
-            # username = form.cleaned_data.get('username')
-            # password = form.cleaned_data.get('password')
-            # print(username)            
-            
-            user = authenticate(username=username, password=password)
- 
-            if user is not None:
-                auth_login(request, user)
-                return redirect('/app/home')
-            else:
-                messages.error(request, "Invalid login or password")
-        else:
-            messages.error(request, "Invalid login or password")
-
-    form = LoginForm()
-    return render(request, 'login.html', {'form': form})
-
 def logout(request):
     auth_logout(request)
     return redirect('/app/home')
 
-def home(request):
-    return render(request, 'home.html')
+class CustomHomeView(TemplateView):
+    template_name = 'home.html'
+    def get(self, request):
+        return render(request, template_name=self.template_name)
