@@ -12,95 +12,68 @@
   {% include './tabs.html'%}
 </div>
 
-{% comment %} <div class="row justify-content-center mt-3"> {% endcomment %}
-  <div class="container mt-3">
-    <div class="card-columns customized-card-column">
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title that wraps to a new line</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-            content. This content is a little bit longer.</p>
-        </div>
+<div class="container mt-3">
+  <div class="card-columns customized-card-column">
+
+    {% for obj in all_entries %}
+    {% include './cards/customCard.html' with data=obj %}
+    {% endfor %}
+
+    <div class="card">
+      <img src="{% static '/app/images/default.jpg' %}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Kulki</h5>
+        <p class="card-text">Sa to ciekawe kulki, w bardzo dobrej promocji umozliwajace swietna zabawe</p>
       </div>
-      <div class="card p-3">
-        <blockquote class="blockquote mb-0 card-body">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-          <footer class="blockquote-footer">
-            <small class="text-muted">
-              Someone famous in <cite title="Source Title">Source Title</cite>
-            </small>
-          </footer>
-        </blockquote>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><b>500</b> PLN</li>
+        <li class="list-group-item"><b>27-01-2020 </li>
+        <li class="list-group-item"><b></b></li>
+      </ul>
+      <div class="card-body">
+
+        <a href="#" class="btn btn-primary btn-block">Go to offer</a>
       </div>
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
-      <div class="card bg-primary text-white text-center p-3">
-        <blockquote class="blockquote mb-0">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat.</p>
-          <footer class="blockquote-footer">
-            <small>
-              Someone famous in <cite title="Source Title">Source Title</cite>
-            </small>
-          </footer>
-        </blockquote>
-      </div>
-      <div class="card text-center">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
-      <div class="card">
-        <img class="card-img" src="..." alt="Card image">
-      </div>
-      <div class="card p-3 text-right">
-        <blockquote class="blockquote mb-0">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-          <footer class="blockquote-footer">
-            <small class="text-muted">
-              Someone famous in <cite title="Source Title">Source Title</cite>
-            </small>
-          </footer>
-        </blockquote>
-      </div>
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-            content.
-            This card has even longer content than the first to show that equal height action.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
+    </div>
+
+
+
+    {% comment %} Quote {% endcomment %}
+    {% include './cards/quote.html'%}
+
+    {% comment %} Without image {% endcomment %}
+    {% include './cards/withoutimage.html'%}
+
+    {% comment %} Simple card {% endcomment %}
+    {% include './cards/simple.html'%}
+
+    {% comment %} Quote blue {% endcomment %}
+    {% include './cards/quoteblue.html'%}
+
+    {% comment %} Only image {% endcomment %}
+    {% include './cards/image.html'%}
+
+  </div>
+</div>
+{% comment %} {% for obj in all_entries %} {% endcomment %}
+
+{% comment %} <div class="col-3">
+  <div class="card">
+
+    <img class="card-img-top" src={{obj.link_to_image}} alt="Card image">
+
+    <div class="card-body">
+      <h4 class="card-title">{{obj.title }}</h4>
+      <p class="card-text">{{obj.description}} </p>
+      <a href="#" class="btn btn-primary">Go to offer</a>
     </div>
   </div>
-  {% comment %} {% for obj in all_entries %} {% endcomment %}
+</div> {% endcomment %}
+{% comment %} {% if forloop.counter|divisibleby:'4' %}
+<div class="w-100"></div>
+{% endif %} {% endcomment %}
 
-  {% comment %} <div class="col-3">
-    <div class="card" style="width: 95%; height: auto;">
-
-      <img class="card-img-top" src={{obj.link_to_image}} alt="Card image">
-
-      <div class="card-body">
-        <h4 class="card-title">{{obj.title }}</h4>
-        <p class="card-text">{{obj.description}} </p>
-        <a href="#" class="btn btn-primary">Go to offer</a>
-      </div>
-    </div>
-  </div> {% endcomment %}
-  {% comment %} {% if forloop.counter|divisibleby:'4' %}
-  <div class="w-100"></div>
-  {% endif %} {% endcomment %}
-
-  {% comment %} {% endfor %}
+{% comment %} {% endfor %}
 </div> {% endcomment %}
 
 {% comment %} {% include './footer.html'%} {% endcomment %}
