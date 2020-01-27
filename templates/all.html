@@ -16,65 +16,19 @@
   <div class="card-columns customized-card-column">
 
     {% for obj in all_entries %}
-    {% include './cards/customCard.html' with data=obj %}
+
+      {% include './cards/quoteblue.html'%}
+
+      {% include './cards/bettercustomCard.html' with data=obj %}
+
+      {% include './cards/simple.html' with data=obj%}
+
+      {% include './cards/image.html'%}
+
     {% endfor %}
-
-    <div class="card">
-      <img src="{% static '/app/images/default.jpg' %}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Kulki</h5>
-        <p class="card-text">Sa to ciekawe kulki, w bardzo dobrej promocji umozliwajace swietna zabawe</p>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item"><b>500</b> PLN</li>
-        <li class="list-group-item"><b>27-01-2020 </li>
-        <li class="list-group-item"><b></b></li>
-      </ul>
-      <div class="card-body">
-
-        <a href="#" class="btn btn-primary btn-block">Go to offer</a>
-      </div>
-    </div>
-
-
-
-    {% comment %} Quote {% endcomment %}
-    {% include './cards/quote.html'%}
-
-    {% comment %} Without image {% endcomment %}
-    {% include './cards/withoutimage.html'%}
-
-    {% comment %} Simple card {% endcomment %}
-    {% include './cards/simple.html'%}
-
-    {% comment %} Quote blue {% endcomment %}
-    {% include './cards/quoteblue.html'%}
-
-    {% comment %} Only image {% endcomment %}
-    {% include './cards/image.html'%}
-
   </div>
 </div>
-{% comment %} {% for obj in all_entries %} {% endcomment %}
 
-{% comment %} <div class="col-3">
-  <div class="card">
-
-    <img class="card-img-top" src={{obj.link_to_image}} alt="Card image">
-
-    <div class="card-body">
-      <h4 class="card-title">{{obj.title }}</h4>
-      <p class="card-text">{{obj.description}} </p>
-      <a href="#" class="btn btn-primary">Go to offer</a>
-    </div>
-  </div>
-</div> {% endcomment %}
-{% comment %} {% if forloop.counter|divisibleby:'4' %}
-<div class="w-100"></div>
-{% endif %} {% endcomment %}
-
-{% comment %} {% endfor %}
-</div> {% endcomment %}
 
 {% comment %} {% include './footer.html'%} {% endcomment %}
 {% endblock %}
