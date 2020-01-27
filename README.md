@@ -5,6 +5,22 @@ Users have the option of assessing whether they like the offer or not.
 A logged member can add/change offer and also mark end of the offer.
 
 
+## Requirements
+```bash
+Python 3+
+Django
+
+# Crispy forms
+pip install django-crispy-forms
+
+# Bootstrap 4
+pip install django-bootstrap4
+
+# Bootstrap date picker
+pip install django-bootstrap-datepicker-plus
+ 
+```
+
 
 ## Development
 
