@@ -17,15 +17,42 @@
 
     {% for obj in all_entries %}
 
-      {% include './cards/quoteblue.html'%}
+    {% include './cards/quoteblue.html'%}
 
-      {% include './cards/bettercustomCard.html' with data=obj %}
+    {% include './cards/bettercustomCard.html' with data=obj %}
 
-      {% include './cards/simple.html' with data=obj%}
+    {% include './cards/simple.html' with data=obj%}
 
-      {% include './cards/image.html'%}
+    {% include './cards/image.html'%}
 
     {% endfor %}
+
+
+
+    <input type="text" required="" name="username" maxlength="150" id="id_username" autofocus="">
+    <div id="other">
+      Trigger the handler
+    </div>
+
+
+
+    {% block javascript %}
+
+    <script>
+    var myVariable = 0;
+      $("#other").click(function () {
+        console.log(myVariable++)
+      });
+    </script>
+
+
+    <script>
+      $("#id_username").change(function () {
+        console.log($(this).val());
+      });
+    </script>
+    {% endblock %}
+
   </div>
 </div>
 
