@@ -29,17 +29,37 @@
 
 
 
-    <input type="text" required="" name="username" maxlength="150" id="id_username" autofocus="">
+    {% comment %} <input type="text" required="" name="username" maxlength="150" id="id_username" autofocus="">
     <div id="other">
       Trigger the handler
     </div>
+
+    <button type="button" id="minus" class="btn btn-danger btn-block" style="float: right; width:50%;">-s</button>
+    <button type="button" id="minus" class="btn btn-danger btn-block" style="float: right; width:50%;">-</button>
+    <button type="button" id="plus" class="btn btn-success btn-block"
+      style="float: left; width:50%;margin-top:0;">+</button>
+    <p></p> {% endcomment %}
 
 
 
     {% block javascript %}
 
+
+
+
     <script>
-    var myVariable = 0;
+      var myVariable = 0;
+      $("#plus").click(function () {
+        console.log(++myVariable)
+      });
+
+      $("#minus").click(function () {
+        console.log(--myVariable)
+      });
+    </script>
+
+    <script>
+      var myVariable = 0;
       $("#other").click(function () {
         console.log(myVariable++)
       });

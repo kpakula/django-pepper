@@ -1,5 +1,8 @@
       {% load static %}
       {% comment %} Only image {% endcomment %}
       <div class="card">
-          <img class="card-img" src="{% static '/app/images/default.jpg' %}" alt="Card image">
+          <img class="card-img my-img-button" src="{% static '/app/images/default.jpg' %}" alt="Card image"></img>
+          <button type="button" class="btn btn-danger btn-block"
+              style="float: right; width:50%;">-</button>
+          <button type="button" class="btn btn-success btn-block" style="float: left; width:50%;margin-top:0;">+</button>
       </div>
