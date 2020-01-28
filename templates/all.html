@@ -47,8 +47,8 @@
 
 
 
-    <script>
-      var myVariable = 0;
+    {% comment %} <script> {% endcomment %}
+      {% comment %} var myVariable = 0;
       $("#plus").click(function () {
         console.log(++myVariable)
       });
@@ -70,7 +70,7 @@
       $("#id_username").change(function () {
         console.log($(this).val());
       });
-    </script>
+    </script> {% endcomment %}
     {% endblock %}
 
   </div>
