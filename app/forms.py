@@ -13,7 +13,7 @@ class LoginForm(forms.ModelForm):
 class OfferForm(forms.ModelForm):
     class Meta:
         model = Offer
-        exclude = ['user', 'date_published']
+        exclude = ['user', 'date_published', 'votes']
         widgets = {
             'date_start': DatePickerInput(format='%Y-%m-%d'),
             'date_end': DatePickerInput(format='%Y-%m-%d'), 

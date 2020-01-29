@@ -100,17 +100,27 @@ def logout(request):
 class CustomHomeView(TemplateView):
     template_name = 'home.html'
     # Hot offers
+    def get_all_by_votes(self):
+        all_objects = Offer.objects.all()
+        all_entries = all_objects.filter(votes__gte=150)[:10]
+        return all_entries
 
     def get(self, request):
-        return render(request, self.template_name, {'nbar': 'home'})
+        all_entries = self.get_all_by_votes()
+
+        return render(request, self.template_name, {'nbar': 'home', 'all_entries': all_entries})
 
 
 class CustomTabNewsView(TemplateView):
     template_name = 'news.html'
-    # New offers
-
+    
+    def get_all_by_date(self):
+        all_entries = Offer.objects.all().order_by('date_published')[:20]
+        return all_entries
+    
     def get(self, request):
-        return render(request, self.template_name, {'nbar': 'news'})
+        all_entries = self.get_all_by_date()
+        return render(request, self.template_name, {'nbar': 'news', 'all_entries': all_entries})
 
 
 class CustomAllOfferView(TemplateView):
@@ -129,6 +139,18 @@ class CustomAllOfferView(TemplateView):
     def get(self, request):
         all_entries = self.get_all()
         return render(request, self.template_name, {'nbar': 'all', 'all_entries': all_entries})
+    
+    
+# class CustomNewsOfferView(TemplateView):
+#     template_name = 'news.html'
+    
+#     def get_all_by_date(self):
+#         all_entries = Offer.objects.all().order_by('date_published')
+    
+    
+#     def get(self, request):
+#         all_entries = self.get_all_by_date()
+#         return render(request, self.template_name, {})
 
 
 class CustomAddOffer(TemplateView):

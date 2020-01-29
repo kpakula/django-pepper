@@ -18,10 +18,11 @@ class Offer(models.Model):
     date_published = models.DateField()
     date_start = models.DateField()
     date_end = models.DateField(blank=True, null=True)
+    old_price = models.FloatField()
     price = models.FloatField()
     votes = models.BigIntegerField()
     link = models.CharField(max_length=2048)
-    description = models.CharField(max_length=500)
+    description = models.CharField(max_length=140)
     link_to_image = models.CharField(max_length=2048)
 
     def __str__(self):

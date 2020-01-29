@@ -3,7 +3,7 @@
 
 
 {% block content %}
-<link rel="stylesheet" type="text/css" href="{% static 'app/home.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app/news.css' %}">
 
 {% include './navbar.html'%}
 
@@ -12,6 +12,13 @@
   {% include './tabs.html'%}
 </div>
 
+<div class="container mt-3">
+  <div class="card-columns customized-card-column">
+    {% for obj in all_entries %}
+    {% include './cards/bettercustomCard.html' with data=obj %}
+    {% endfor %}
+  </div>
+</div>
 
 
 

@@ -13,6 +13,17 @@
 </div>
 
 
-{% include './footer.html'%}
+<div class="container mt-3">
+  <div class="card-columns customized-card-column">
+      {% include './cards/image.html'%}
+    {% for obj in all_entries %}
+    {% include './cards/bettercustomCard.html' with data=obj %}
+        {% include './cards/image.html'%}
+    {% endfor %}
+  </div>
+</div>
+
+
+{% comment %} {% include './footer.html'%} {% endcomment %}
 
 {% endblock %}

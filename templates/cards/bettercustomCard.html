@@ -1,19 +1,25 @@
                 {% load static %}
-                <div class="card">
-                    {% comment %} <img src="{% static '/app/images/default.jpg' %}" class="card-img-top" alt="..."> {% endcomment %}
-                    <img src={{obj.link_to_image}} class="card-img-top" alt="Card img" style="max-width: 355px; max-height: 467px;">
+                <link rel="stylesheet" type="text/css" href="{% static 'app/bettercustomCard.css' %}">
+                <div class="card update-card">
+                    {% comment %} <img src="{% static '/app/images/default.jpg' %}" class="card-img-top" alt="...">
+                    {% endcomment %}
+                    <img src={{obj.link_to_image}} class="card-img-top" alt="Card img"
+                        style="max-width: 355px; max-height: 467px;">
                     <div class="card-body">
                         <h5 class="card-title">{{obj.title}}</h5>
                         <p class="card-text">{{obj.description}}
                         </p>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><b>{{obj.price}}</b> PLN</li>
+                        <li class="list-group-item">
+                            <del>{{obj.old_price}} PLN</del></br>
+                            <div class="text-success"><b>{{obj.price}}</b>  PLN</div>
+                        </li>
                         <li class="list-group-item"><b>{{obj.date_start}}</b>
-                        {% if obj.date_start != obj.date_end %}
+                            {% if obj.date_start != obj.date_end %}
                             - <b>{{obj.date_end}}</b>
-                        {% endif%}
-                         </li>
+                            {% endif%}
+                        </li>
                         {% comment %} <li class="list-group-item"><b></b></li> {% endcomment %}
                     </ul>
                     <div class="card-body">
