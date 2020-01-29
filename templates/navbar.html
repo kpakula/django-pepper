@@ -23,7 +23,7 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/app/offers/add/">Add</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/offer/my">Your offers</a>
+                            <a class="dropdown-item" href="/app/offers/my">Your offers</a>
                             {% endif %}
                         </div>
                     </li>
@@ -36,8 +36,8 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             {% if user.is_authenticated %}
-                            <a class="dropdown-item" href="/app/settings/">Settings</a>
-                            <div class="dropdown-divider"></div>
+                            {% comment %} <a class="dropdown-item" href="/app/settings/">Settings</a>
+                            <div class="dropdown-divider"></div> {% endcomment %}
                             <a class="dropdown-item" href="/app/logout">Logout</a>
 
                             {% else %}

@@ -6,12 +6,13 @@ from django.contrib.auth import logout as auth_logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, UpdateView
 from app.forms import LoginForm, OfferForm
 from datetime import date
 from .models import Offer
 # Create your views here.
 from django.views import generic
+from django.shortcuts import get_object_or_404
 
 HOME_PAGE = '/app/home/'
 
@@ -96,6 +97,50 @@ def logout(request):
     auth_logout(request)
     return redirect(HOME_PAGE)
 
+def OfferUpdateView(request, pk):
+
+    # post = get_object_or_404(Offer, 6)\
+    if request.method == "POST":
+        oD = Offer.objects.all()
+        offer = oD.filter(id=pk)[0]
+        form = OfferForm(request.POST)
+
+        if form.is_valid():
+            form = OfferForm(instance=offer)
+            post = form.save(commit=False)
+            
+            post.user = request.user
+            post.votes = offer.votes
+
+            post.description = request.POST.get("description")
+            post.date_start = request.POST.get("date_start")
+            post.date_end = request.POST.get("date_end")
+            post.title = request.POST.get("title")
+            post.old_price = request.POST.get("old_price")
+            post.price = request.POST.get("price")
+            post.link = request.POST.get("link")
+            post.link_to_image = request.POST.get("link_to_image")
+            
+            today = date.today()
+            d1 = today.strftime("%Y-%m-%d")
+            post.date_published = d1
+            
+            print(request.POST.get('title'))
+            post.save()
+            return redirect('/app/offers/my')
+    else:
+        oD = Offer.objects.all()
+        offer = oD.filter(id=pk)[0]
+        form = OfferForm(instance=offer)
+    template = "update_view.html"
+    context= {'form': form }
+    return render(request, template, context)
+    
+    
+    
+
+
+
 
 class CustomHomeView(TemplateView):
     template_name = 'home.html'
@@ -109,6 +154,20 @@ class CustomHomeView(TemplateView):
         all_entries = self.get_all_by_votes()
 
         return render(request, self.template_name, {'nbar': 'home', 'all_entries': all_entries})
+    
+    
+class CustomMyOfferView(TemplateView):
+    template_name = 'myoffers.html'
+    # My offers
+    def get_my_offers(self, request):
+        all_objects = Offer.objects.all()
+        all_entries = all_objects.filter(user=request.user)
+        return all_entries
+
+    def get(self, request):
+        all_entries = self.get_my_offers(request)
+
+        return render(request, self.template_name, {'all_entries': all_entries})
 
 
 class CustomTabNewsView(TemplateView):

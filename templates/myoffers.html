@@ -1,0 +1,29 @@
+{% extends './base.html' %}
+{% load static %}
+
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'app/home.css' %}">
+
+{% include './navbar.html'%}
+
+
+{% comment %} <div class="row rowTest justify-content-center">
+    {% include './tabs.html'%}
+</div> {% endcomment %}
+
+
+<div class="container mt-3">
+    <div class="card-columns customized-card-column">
+        {% include './cards/image.html'%}
+        {% for obj in all_entries %}
+        {% include './cards/bettercustomCard.html' with data=obj %}
+        {% include './cards/image.html'%}
+        {% endfor %}
+    </div>
+</div>
+
+
+{% comment %} {% include './footer.html'%} {% endcomment %}
+
+{% endblock %}
