@@ -1,0 +1,66 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% load random_numbers %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'app/detail.css' %}">
+
+{% include './navbar.html'%}
+
+
+
+{% comment %} <div class="card" style="width: 50rem;">
+    <img src={{offer.link_to_image}} class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+</div> {% endcomment %}
+<div class="container fill">
+    <div class="row align-items-center">
+        <div class="col mt-3">
+            <div class="card updatedcard">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src={{offer.link_to_image}} class="card-img" style="max-width:370px; max-height:277px" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{offer.title}}</h5>
+                            <p class="card-text">{{offer.description}}</p>
+                            <p class="card-text"><small class="text-muted">by {{offer.user}}</small></p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">{{offer.price}}</li>
+                            <li class="list-group-item"><b>{{offer.date_start|date:"d/m/Y"}}</b> - <b>{{offer.date_end|date:"d/m/Y"}}</b> </li>
+                            <li class="list-group-item">
+                            <button type="button" id="plus" class="btn btn-success btn-block" style="float: left; width:49%;margin-right: 1%;">+</button>
+                            <button type="button" id="plus" class="btn btn-danger btn-block" style="float: left; width:49%;margin-top:0;">-</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% comment %} <h1> {{offer.id}} </h1>
+
+<p>{{offer.title}}</p>
+
+<p>{{offer.date_published}}</p>
+
+<p>{{offer.date_start|date:"d-m-Y"}}</p>
+<p>{{offer.date_end}}</p>
+<p>{{offer.link}}</p>
+<p>{{offer.description}}</p>
+<p>{{offer.link_to_image}}</p> {% endcomment %}
+
+
+{% comment %} {% include './footer.html'%} {% endcomment %}
+{% endblock %}

@@ -1,6 +1,7 @@
 {% extends './base.html' %}
 {% load static %}
 
+{% load random_numbers %}
 
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'app/all.css' %}">
@@ -19,14 +20,17 @@
 
     {% include './cards/quoteblue.html'%}
 
+
     {% include './cards/bettercustomCard.html' with data=obj %}
 
-    {% include './cards/simple.html' with data=obj%}
+    {% comment %} {% include './cards/simple.html' with data=obj%} {% endcomment %}
 
     {% include './cards/image.html'%}
 
     {% endfor %}
 
+        <p>A random value {% random_int 1 10 %}</p>
+    <p>A random value {% random_int 1 10 %}</p>
 
 
     {% comment %} <input type="text" required="" name="username" maxlength="150" id="id_username" autofocus="">

@@ -11,5 +11,7 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('offers/news/', views.CustomTabNewsView.as_view(), name='news'),
     path('offers/all/', views.CustomAllOfferView.as_view(), name='all'),
-    path('offers/add/', views.CustomAddOffer.as_view(), name='addoffer')
+    path('offers/add/', views.CustomAddOffer.as_view(), name='addoffer'),
+    # ex /app/offers/1
+    path('offers/<int:pk>/', views.DetailView.as_view(), name='detail'),
 ]

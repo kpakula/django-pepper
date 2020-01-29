@@ -1,22 +1,31 @@
 from django.shortcuts import render, HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import  authenticate
+from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.shortcuts import render, redirect
-from django.contrib import messages 
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.views.generic import TemplateView
 from app.forms import LoginForm, OfferForm
 from datetime import date
 from .models import Offer
 # Create your views here.
+from django.views import generic
 
 HOME_PAGE = '/app/home/'
 
 
 def index(request):
     return redirect(HOME_PAGE)
+
+
+# def detail(request):
+#     return render(request, 'offer', {})
+
+class DetailView(generic.DetailView):
+    model = Offer
+    template_name = 'detail.html'
 
 
 def register(request):
@@ -33,7 +42,7 @@ def register(request):
             return redirect(HOME_PAGE)
     else:
         form = UserCreationForm()
-        
+
     return render(request, 'signup.html', {'form': form})
 
 
@@ -50,7 +59,7 @@ class CustomLoginView(TemplateView):
         if request.user.is_authenticated:
             return redirect(HOME_PAGE)
         form = LoginForm(request.POST)
-        
+
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
@@ -66,35 +75,39 @@ class CustomLoginView(TemplateView):
         form = LoginForm()
         return render(request, self.template_name, {'form': form})
 
+
 def logout(request):
     if not request.user.is_authenticated:
         return redirect(HOME_PAGE)
     auth_logout(request)
     return redirect(HOME_PAGE)
 
+
 class CustomHomeView(TemplateView):
     template_name = 'home.html'
     # Hot offers
+
     def get(self, request):
         return render(request, self.template_name, {'nbar': 'home'})
+
 
 class CustomTabNewsView(TemplateView):
     template_name = 'news.html'
     # New offers
+
     def get(self, request):
         return render(request, self.template_name, {'nbar': 'news'})
 
 
 class CustomAllOfferView(TemplateView):
     template_name = 'all.html'
-    
+
     def get_all(self):
-        # idk 
+        # idk
         all_entries = Offer.objects.all()
 
         # for offer in all_entries.iterator():
         #     print(offer.title)
-
 
         return all_entries
 
@@ -102,6 +115,7 @@ class CustomAllOfferView(TemplateView):
     def get(self, request):
         all_entries = self.get_all()
         return render(request, self.template_name, {'nbar': 'all', 'all_entries': all_entries})
+
 
 class CustomAddOffer(TemplateView):
     template_name = 'addOffer.html'
@@ -124,6 +138,7 @@ class CustomAddOffer(TemplateView):
             today = date.today()
             d1 = today.strftime("%Y-%m-%d")
             addOffer.date_published = d1
+            addOffer.votes = 0
 
             addOffer.save()
             return redirect(HOME_PAGE)
