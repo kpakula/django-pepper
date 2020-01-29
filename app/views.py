@@ -6,7 +6,7 @@ from django.contrib.auth import logout as auth_logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.views.generic import TemplateView, UpdateView
+from django.views.generic import TemplateView, UpdateView, DeleteView
 from app.forms import LoginForm, OfferForm
 from datetime import date
 from .models import Offer
@@ -97,6 +97,15 @@ def logout(request):
     auth_logout(request)
     return redirect(HOME_PAGE)
 
+def OfferDeleteView(request, pk):
+    instance = Offer.objects.get(id=pk)
+    instance.delete()
+        
+    return redirect('/app/offers/my')
+
+
+
+
 def OfferUpdateView(request, pk):
 
     # post = get_object_or_404(Offer, 6)\
@@ -127,7 +136,7 @@ def OfferUpdateView(request, pk):
             
             print(request.POST.get('title'))
             post.save()
-            return redirect('/app/offers/my')
+            return redirect('/app/offers/'+ str(pk))
     else:
         oD = Offer.objects.all()
         offer = oD.filter(id=pk)[0]

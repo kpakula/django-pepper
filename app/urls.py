@@ -12,9 +12,9 @@ urlpatterns = [
     path('offers/news/', views.CustomTabNewsView.as_view(), name='news'),
     path('offers/all/', views.CustomAllOfferView.as_view(), name='all'),
     path('offers/add/', views.CustomAddOffer.as_view(), name='addoffer'),
-    # ex /app/offers/1
     path('offers/<int:pk>/', views.DetailView.as_view(), name='detail'),
     path('offers/<int:pk>/update/', views.OfferUpdateView, name='update'),
+    path('offers/<int:pk>/delete/', views.OfferDeleteView, name='delete'),
     path('offers/upvote/<int:pk>', views.upvote, name="upvote"),
     path('offers/downvote/<int:pk>', views.downvote, name="downvote"),
     path('offers/my/', views.CustomMyOfferView.as_view(), name="myview"),
