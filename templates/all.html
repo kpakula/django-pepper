@@ -21,6 +21,7 @@
     {% include './cards/quoteblue.html'%}
 
 
+    {% include './cards/image.html'%}
     {% include './cards/bettercustomCard.html' with data=obj %}
 
     {% comment %} {% include './cards/simple.html' with data=obj%} {% endcomment %}
@@ -29,8 +30,10 @@
 
     {% endfor %}
 
-        <p>A random value {% random_int 1 10 %}</p>
-    <p>A random value {% random_int 1 10 %}</p>
+        {% include './cards/image.html'%}
+
+        {% comment %} <p>A random value {% random_int 1 10 %}</p>
+    <p>A random value {% random_int 1 10 %}</p> {% endcomment %}
 
 
     {% comment %} <input type="text" required="" name="username" maxlength="150" id="id_username" autofocus="">

@@ -20,8 +20,22 @@ def index(request):
     return redirect(HOME_PAGE)
 
 
-# def detail(request):
-#     return render(request, 'offer', {})
+def upvote(request, pk):
+    if not request.user.is_authenticated:
+        return redirect(HOME_PAGE)
+    # return render(request, 'offer', {})
+    obj = Offer.objects.get(id=pk)
+    obj.votes += 1
+    obj.save()
+    return redirect('/app/offers/'+str(pk))
+
+
+def downvote(request, pk):
+    obj = Offer.objects.get(id=pk)
+    obj.votes -= 1
+    obj.save()
+    return redirect('/app/offers/'+str(pk))
+
 
 class DetailView(generic.DetailView):
     model = Offer

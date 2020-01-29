@@ -24,8 +24,12 @@
         <div class="col mt-3">
             <div class="card updatedcard">
                 <div class="row no-gutters">
-                    <div class="col-md-4">
-                        <img src={{offer.link_to_image}} class="card-img" style="max-width:370px; max-height:277px" alt="...">
+                    <div class="col-md-4 cont">
+                        <a href={{offer.link}} target="_blank">
+                            <img src={{offer.link_to_image}} class="card-img opacityimage" style="max-width:370px; max-height:277px;"
+                                alt="Offer image">
+                            </img>
+                        </a>
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
@@ -34,11 +38,17 @@
                             <p class="card-text"><small class="text-muted">by {{offer.user}}</small></p>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">{{offer.price}}</li>
-                            <li class="list-group-item"><b>{{offer.date_start|date:"d/m/Y"}}</b> - <b>{{offer.date_end|date:"d/m/Y"}}</b> </li>
+                            <li class="list-group-item">{{offer.price}} PLN   Votes: {{offer.votes}}</li>
+                            <li class="list-group-item"><b>{{offer.date_start|date:"d/m/Y"}}</b> -
+                                <b>{{offer.date_end|date:"d/m/Y"}}</b> </li>
                             <li class="list-group-item">
-                            <button type="button" id="plus" class="btn btn-success btn-block" style="float: left; width:49%;margin-right: 1%;">+</button>
-                            <button type="button" id="plus" class="btn btn-danger btn-block" style="float: left; width:49%;margin-top:0;">-</button>
+                                <a href="/app/offers/upvote/{{ offer.id }}">
+                                <button type="button" id="plus" class="btn btn-success btn-block"
+                                    style="float: left; width:49%;margin-right: 1%;">+</button></a>
+                                <a href="/app/offers/downvote/{{ offer.id }}">
+                                <button type="button" id="plus" class="btn btn-danger btn-block"
+                                    style="float: left; width:49%;margin-top:0;">-</button>
+                                </a>
                             </li>
                         </ul>
                     </div>
